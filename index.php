@@ -1,61 +1,50 @@
-<?php 
+<?php
 
-class Movie
-{
+include __DIR__ . '/Models/Movie.php';
+include __DIR__ . '/db.php'
 
-    public $title;
+?>
 
-    public $description;
+<!DOCTYPE html>
+<html lang="en">
 
-    public $coverImage;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies OOP and Objects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    public $cast;
+</head>
 
-    public $rating;
+<body class="bg-dark">
+    <div class="container py-5">
+        <div class="row row-cols-3">
 
-    public $language;
+            <?php foreach ($movies as $movie) : ?>
+                <div class="col">
+                    <div class="card h-100" style="width: 18rem;">
+                        <img src="<?= $movie->coverImage ?>" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h3><?= $movie->title ?></h3>
+                            <ul>
+                                <li>Cast: <?= $movie->cast ?></li>
+                                <li>Rating: <?= $movie->rating ?></li>
+                                <li>Language: <?= $movie->language ?></li>
+                                <li>Adult: <?= $movie->adult ?></li>
+                                <li>Release date: <?= $movie->releaseDate ?></li>
+                                <li>Genres: <?php foreach ($movie->genres as $genre) echo $genre . ","  ?></li>
+                            </ul>
+                            <p class="card-text"><?= $movie->description ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
 
-    public $adult;
+        </div>
 
-    public $releaseDate;
-
-    public $genres;
-
-
-    function __construct($_title, $_description, $_coverImage, $_cast, $_rating, $_language, $_adult, $_releaseDate, $_genres)
-    {
-
-        $this->title = $_title;
-        $this->description = $_description;
-        $this->coverImage = $_coverImage;
-        $this->cast = $_cast;
-        $this->rating = $_rating;
-        $this->language = $_language;
-        $this->adult = $_adult;
-        $this->releaseDate = $_releaseDate;
-        $this->genres = $_genres;
-
-    }
-
-    function getGenres(){
-        return $this->genres;
-    }
-
-
-}
-
-$movies= [];
-
-array_push($movies,
-
-$movie_1 = new Movie("Jojo Bizzarre Adventures", "The best anime ever made", NULL, NULL, "5/5", "JP", "false", "01/11/1993", "Anime"),
-$movie_2 = new Movie("Matrix", "A classic", NULL, "Keanu Reeves", "5/5", "EN", "true", "31/03/1999", ["Action", "Science Fiction"]),
-$movie_3 = new Movie("El Camino", "A classic", NULL, "Bryan Cranston", "4/5", "EN", "true", "11/10/2019", "Action"),
-
-);
-
-var_dump($movies);
+    </div>
 
 
+</body>
 
-
+</html>
